@@ -33,7 +33,9 @@ module.exports = {
 
   async action(cache) {
     const data = cache.actions[cache.index];
-    const member = await this.getMemberFromData(data.member, data.varName, data.cache);
+    const type = parseInt(data.member, 10);
+    const varName = this.evalMessage(data.varName, cache);
+    const member = await this.getMember(type, varName, cache);
     const dataName = this.evalMessage(data.dataName, cache);
 
     member.delData(dataName);
